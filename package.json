@@ -1,7 +1,7 @@
 {
   "name": "iproyal-sdk",
   "version": "1.0.0",
-  "description": "IProyal SDK for TypeScript",
+  "description": "A simple and powerful TypeScript SDK for IPRoyal proxy services - manage residential, ISP, datacenter, and mobile proxies with ease",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -12,16 +12,36 @@
       "import": "./dist/index.mjs"
     }
   },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erfanhekmati/iproyal-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erfanhekmati/iproyal-sdk/issues"
+  },
+  "homepage": "https://github.com/erfanhekmati/iproyal-sdk#readme",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "eslint src --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "iproyal",
     "sdk",
-    "typescript"
+    "typescript",
+    "proxy",
+    "residential",
+    "datacenter",
+    "isp",
+    "mobile"
   ],
   "author": "",
   "license": "MIT",

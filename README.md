@@ -1,16 +1,19 @@
 # IPRoyal SDK
 
-A comprehensive TypeScript SDK for all IPRoyal Proxy APIs. Built with clean code principles, SOLID design patterns, and full TypeScript support.
+A simple and powerful TypeScript/JavaScript SDK for IPRoyal proxy services. Easily manage residential, ISP, datacenter, and mobile proxies with full type safety and modern async/await syntax.
 
-## Features
+**Perfect for:** Web scraping, data collection, automation, privacy-focused applications, and any project requiring reliable proxy infrastructure.
 
-- ✅ **Full API Coverage** - All IPRoyal proxy types (Residential, ISP, Datacenter, Mobile)
-- 🔒 **Type-Safe** - Complete TypeScript definitions
-- 🏗️ **Clean Architecture** - SOLID principles and design patterns
-- 🧪 **Well Tested** - Comprehensive unit and integration tests
-- 🚀 **Modern** - Built with latest TypeScript and ES modules
-- 📝 **Well Documented** - JSDoc comments and examples
-- 🔌 **Dual API Support** - Both Residential and Reseller APIs
+## Why Use This SDK?
+
+- 🚀 **Easy to Use** - Simple, intuitive API that just works
+- ✅ **Complete Coverage** - All IPRoyal proxy types (Residential, ISP, Datacenter, Mobile)
+- 🔒 **Type-Safe** - Full TypeScript support with autocomplete
+- 📦 **Zero Config** - Works out of the box with sensible defaults
+- 🧪 **Battle-Tested** - Comprehensive test coverage
+- 📝 **Well Documented** - Clear examples and API reference
+- 🔌 **Dual API** - Both Residential and Reseller APIs in one package
+- ⚡ **Modern** - Built with latest TypeScript, supports ESM and CommonJS
 
 ## Installation
 
@@ -24,40 +27,68 @@ pnpm add iproyal-sdk
 
 ## Quick Start
 
+Get started in less than 2 minutes:
+
 ```typescript
 import { IPRoyalClient } from 'iproyal-sdk';
 
+// Initialize the client with your API token
 const client = new IPRoyalClient({
     apiToken: 'your-api-token-here',
 });
 
-// Residential Proxies API
+// Check your residential proxy account
 const userInfo = await client.residential.user.getInfo();
 console.log(`Available traffic: ${userInfo.available_traffic} GB`);
 
-const entryNodes = await client.residential.access.getEntryNodes();
-console.log('Entry nodes:', entryNodes);
+// Get available proxy locations
+const countries = await client.residential.access.getCountries();
+console.log('Available countries:', countries);
 
-// Reseller API (ISP, Datacenter, Mobile)
+// Generate proxy list for your application
+const proxies = await client.residential.access.generateProxyList({
+    hostname: 'geo.iproyal.com',
+    port: '12321',
+    username: 'your-username',
+    password: 'your-password',
+    location: '_country-us',
+    proxy_count: 10,
+});
+
+// For ISP/Datacenter/Mobile proxies (Reseller API)
 const balance = await client.reseller.user.getBalance();
-console.log(`Balance: $${balance}`);
+console.log(`Account balance: $${balance}`);
 
 const products = await client.reseller.products.getProducts();
-console.log('Available products:', products);
-
-const orders = await client.reseller.orders.list();
-console.log('Your orders:', orders);
+console.log('Available proxy products:', products);
 ```
 
 ## Configuration
 
+### Basic Setup
+
+```typescript
+const client = new IPRoyalClient({
+    apiToken: 'your-api-token', // Required: Get from IPRoyal dashboard
+});
+```
+
+### Advanced Configuration
+
 ```typescript
 const client = new IPRoyalClient({
     apiToken: 'your-api-token',
-    baseURL: 'https://resi-api.iproyal.com/v1', // Optional, default value
-    timeout: 30000, // Optional, default 30 seconds
+    baseURL: 'https://resi-api.iproyal.com/v1', // Optional: Custom API endpoint
+    timeout: 30000, // Optional: Request timeout in ms (default: 30000)
 });
 ```
+
+### Getting Your API Token
+
+1. Log in to your [IPRoyal Dashboard](https://dashboard.iproyal.com/)
+2. Navigate to API settings
+3. Generate or copy your API token
+4. Use it in the SDK configuration
 
 ## API Reference
 
@@ -486,10 +517,20 @@ Run tests with coverage:
 pnpm test -- --coverage
 ```
 
+## Support
+
+- 📖 **Documentation**: [IPRoyal API Docs](https://docs.iproyal.com/)
+- 💬 **Issues**: [GitHub Issues](https://github.com/erfanhekmati/iproyal-sdk/issues)
+- 🌐 **IPRoyal Website**: [iproyal.com](https://iproyal.com/)
+
 ## License
 
-MIT
+MIT - feel free to use in your projects!
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Disclaimer
+
+This is an unofficial SDK. IPRoyal is a trademark of IPRoyal. This project is not affiliated with or endorsed by IPRoyal.
