@@ -7,19 +7,21 @@ export interface SubUserLimits {
 export interface ResidentialSubUser {
     hash: string;
     username: string;
+    password: string;
     traffic: number;
-    used_traffic: number;
-    limits?: SubUserLimits;
-    created_at: string;
-    updated_at: string;
+    traffic_available: number;
+    traffic_used: number;
 }
 
 export interface ResidentialSubUserList {
     data: ResidentialSubUser[];
     meta: {
         current_page: number;
+        from: number;
         last_page: number;
+        path: string;
         per_page: number;
+        to: number;
         total: number;
     };
 }
