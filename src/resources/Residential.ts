@@ -2,11 +2,10 @@ import { HttpClient } from '../core/HttpClient';
 import {
     ResidentialUserInfo,
     EntryNode,
-    Country,
-    Region,
-    CountrySet,
+    CountriesResponse,
+    RegionsResponse,
+    CountrySetsResponse,
     GenerateProxyListParams,
-    ProxyList,
     ResidentialOrderList,
     ResidentialOrder,
     ResidentialOrderParams,
@@ -41,20 +40,20 @@ export class Residential {
         return this.httpClient.get<EntryNode[]>('/access/entry-nodes');
     }
 
-    async getCountries(): Promise<Country[]> {
-        return this.httpClient.get<Country[]>('/access/countries');
+    async getCountries(): Promise<CountriesResponse> {
+        return this.httpClient.get<CountriesResponse>('/access/countries');
     }
 
-    async getRegions(): Promise<Region[]> {
-        return this.httpClient.get<Region[]>('/access/regions');
+    async getRegions(): Promise<RegionsResponse> {
+        return this.httpClient.get<RegionsResponse>('/access/regions');
     }
 
-    async getCountrySets(): Promise<CountrySet[]> {
-        return this.httpClient.get<CountrySet[]>('/access/country-sets');
+    async getCountrySets(): Promise<CountrySetsResponse> {
+        return this.httpClient.get<CountrySetsResponse>('/access/country-sets');
     }
 
-    async generateProxyList(params: GenerateProxyListParams): Promise<ProxyList> {
-        return this.httpClient.post<ProxyList>('/access/generate-proxy-list', params);
+    async generateProxyList(params: GenerateProxyListParams): Promise<string[]> {
+        return this.httpClient.post<string[]>('/access/generate-proxy-list', params);
     }
 
     async getOrders(params?: PaginationParams): Promise<ResidentialOrderList> {
