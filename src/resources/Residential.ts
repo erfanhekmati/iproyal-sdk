@@ -23,6 +23,7 @@ import {
     ResidentialCreateWhitelistEntryParams,
     ResidentialUpdateWhitelistEntryParams,
     ResidentialIPSkippingList,
+    ResidentialIPSkippingListResponse,
     ResidentialCreateIPSkippingListParams,
     ResidentialUpdateIPSkippingListParams,
     ResidentialRemoveSessionsParams,
@@ -151,8 +152,8 @@ export class Residential {
         );
     }
 
-    async getIPSkippingLists(residentialUserHash: string): Promise<ResidentialIPSkippingList[]> {
-        return this.httpClient.get<ResidentialIPSkippingList[]>(
+    async getIPSkippingLists(residentialUserHash: string): Promise<ResidentialIPSkippingListResponse> {
+        return this.httpClient.get<ResidentialIPSkippingListResponse>(
             `/residential-users/${residentialUserHash}/ips-skipping`
         );
     }
