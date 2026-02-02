@@ -33,8 +33,6 @@ export interface ResidentialCalculatePricingParams {
 }
 
 export interface ResidentialPricingResult {
-    price: number;
-    discount: number;
     total: number;
 }
 
