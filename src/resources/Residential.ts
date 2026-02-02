@@ -110,7 +110,7 @@ export class Residential {
 
     async getWhitelistEntries(
         residentialUserHash: string,
-        params?: PaginationParams
+        params?: PaginationParams & { residential_user_hash?: string }
     ): Promise<ResidentialWhitelistEntryList> {
         return this.httpClient.get<ResidentialWhitelistEntryList>(
             `/residential-users/${residentialUserHash}/whitelist-entries`,
