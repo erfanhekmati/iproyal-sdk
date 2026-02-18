@@ -13,10 +13,10 @@ Or with yarn or pnpm: `yarn add iproyal-sdk` / `pnpm add iproyal-sdk`
 ## Quick Start
 
 ```typescript
-import { IPRoyalClient } from 'iproyal-sdk';
+import { IPRoyalClient } from "iproyal-sdk";
 
 const client = new IPRoyalClient({
-    apiToken: 'your-api-token',
+  apiToken: "your-api-token",
 });
 
 const userInfo = await client.residential.getUserInfo();
@@ -34,13 +34,13 @@ You need an API token. Get it from your [IPRoyal dashboard](https://dashboard.ip
 
 ```typescript
 const client = new IPRoyalClient({
-    apiToken: 'your-api-token',
-    baseURL: 'https://resi-api.iproyal.com/v1',
-    residentialBaseURL: 'https://resi-api.iproyal.com/v1',
-    datacenterBaseURL: 'https://apid.iproyal.com',
-    ispBaseURL: 'https://apid.iproyal.com',
-    mobileBaseURL: 'https://apid.iproyal.com',
-    timeout: 30000,
+  apiToken: "your-api-token",
+  baseURL: "https://resi-api.iproyal.com/v1",
+  residentialBaseURL: "https://resi-api.iproyal.com/v1",
+  datacenterBaseURL: "https://apid.iproyal.com",
+  ispBaseURL: "https://apid.iproyal.com",
+  mobileBaseURL: "https://apid.iproyal.com",
+  timeout: 30000,
 });
 ```
 
@@ -61,16 +61,20 @@ For method signatures and types, check the exported types in the package (full T
 The SDK throws specific errors you can catch:
 
 ```typescript
-import { IPRoyalClient, AuthenticationError, ValidationError } from 'iproyal-sdk';
+import {
+  IPRoyalClient,
+  AuthenticationError,
+  ValidationError,
+} from "iproyal-sdk";
 
 try {
-    await client.residential.getUserInfo();
+  await client.residential.getUserInfo();
 } catch (error) {
-    if (error instanceof AuthenticationError) {
-        console.error('Invalid API token');
-    } else if (error instanceof ValidationError) {
-        console.error('Invalid request parameters');
-    }
+  if (error instanceof AuthenticationError) {
+    console.error("Invalid API token");
+  } else if (error instanceof ValidationError) {
+    console.error("Invalid request parameters");
+  }
 }
 ```
 
