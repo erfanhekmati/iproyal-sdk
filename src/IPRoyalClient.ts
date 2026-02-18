@@ -6,7 +6,7 @@ import { ISP } from './resources/ISP';
 import { Mobile } from './resources/Mobile';
 
 const DEFAULT_RESIDENTIAL_BASE_URL = 'https://resi-api.iproyal.com/v1';
-const DEFAULT_PROXY_API_BASE_URL = 'https://apid.iproyal.com';
+const DEFAULT_PROXY_API_BASE_URL = 'https://apid.iproyal.com/v1/reseller';
 
 export class IPRoyalClient {
     public readonly residential: Residential;
