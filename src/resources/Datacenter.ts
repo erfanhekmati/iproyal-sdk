@@ -1,6 +1,5 @@
 import { HttpClient } from '../core/HttpClient';
 import {
-    DatacenterBalance,
     DatacenterCardList,
     DatacenterProductList,
     DatacenterOrderList,
@@ -11,6 +10,7 @@ import {
     DatacenterCreateOrderParams,
     DatacenterExtendOrderParams,
     DatacenterToggleAutoExtendParams,
+    DatacenterToggleAutoExtendResult,
     DatacenterProxyAvailabilityList,
     DatacenterChangeCredentialsParams,
 } from '../types';
@@ -50,8 +50,8 @@ export class Datacenter {
         return this.httpClient.post<DatacenterOrder>(`/orders/${orderId}/extend`, params);
     }
 
-    async toggleOrderAutoExtend(orderId: number, params: DatacenterToggleAutoExtendParams): Promise<DatacenterOrder> {
-        return this.httpClient.post<DatacenterOrder>(`/orders/${orderId}/toggle-auto-extend`, params);
+    async toggleOrderAutoExtend(params: DatacenterToggleAutoExtendParams): Promise<DatacenterToggleAutoExtendResult> {
+        return this.httpClient.post<DatacenterToggleAutoExtendResult>('/orders/toggle-auto-extend', params);
     }
 
     async getProxyAvailability(): Promise<DatacenterProxyAvailabilityList> {
