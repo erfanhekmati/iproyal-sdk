@@ -8,7 +8,6 @@ export interface EntryNode {
     }>;
 }
 
-/** Wrapper for API option groups (cities, states, isps) */
 export interface OptionsGroup<T> {
     prefix: string;
     options: T[];
@@ -39,7 +38,6 @@ export interface CountryOption {
     states: OptionsGroup<StateOption>;
 }
 
-/** Response shape for GET /access/countries */
 export interface CountriesResponse {
     prefix: string;
     countries: CountryOption[];
@@ -50,7 +48,6 @@ export interface RegionOption {
     name: string;
 }
 
-/** Response shape for GET /access/regions */
 export interface RegionsResponse {
     prefix: string;
     regions: RegionOption[];
@@ -91,7 +88,6 @@ export interface CountrySetOption {
     name: string;
 }
 
-/** Response shape for GET /access/country-sets */
 export interface CountrySetsResponse {
     prefix: string;
     countrySets: CountrySetOption[];

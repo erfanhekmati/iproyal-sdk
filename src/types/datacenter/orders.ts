@@ -1,4 +1,3 @@
-/** Question id to answer mapping: { [questionId]: answer } */
 export type DatacenterProductQuestionAnswers = Record<number, string>;
 
 export interface DatacenterSelectionLocation {
