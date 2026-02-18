@@ -10,15 +10,26 @@ import {
     ValidationError,
 } from '../errors/IPRoyalError';
 
+export type AuthHeaderStyle = 'bearer' | 'x-access-token';
+
+export interface HttpClientOverrides {
+    baseURL?: string;
+    authHeader?: AuthHeaderStyle;
+}
+
 export class HttpClient implements IHttpClient {
     private readonly client: AxiosInstance;
     private readonly apiToken: string;
+    private readonly authHeader: AuthHeaderStyle;
 
-    constructor(config: IPRoyalConfig) {
+    constructor(config: IPRoyalConfig, overrides?: HttpClientOverrides) {
         this.apiToken = config.apiToken;
+        this.authHeader = overrides?.authHeader ?? 'bearer';
+
+        const baseURL = overrides?.baseURL ?? config.baseURL ?? 'https://resi-api.iproyal.com/v1';
 
         this.client = axios.create({
-            baseURL: config.baseURL || 'https://resi-api.iproyal.com/v1',
+            baseURL,
             timeout: config.timeout || 30000,
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +42,11 @@ export class HttpClient implements IHttpClient {
     private setupInterceptors(): void {
         this.client.interceptors.request.use(
             (config: InternalAxiosRequestConfig) => {
-                config.headers.Authorization = `Bearer ${this.apiToken}`;
+                if (this.authHeader === 'x-access-token') {
+                    config.headers['X-Access-Token'] = this.apiToken;
+                } else {
+                    config.headers.Authorization = `Bearer ${this.apiToken}`;
+                }
                 return config;
             },
             (error: unknown) => Promise.reject(error)
