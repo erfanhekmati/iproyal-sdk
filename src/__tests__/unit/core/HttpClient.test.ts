@@ -79,6 +79,58 @@ describe('HttpClient', () => {
                 })
             );
         });
+
+        it('should use overrides baseURL when provided', () => {
+            mockedAxios.create.mockClear();
+            const customBaseURL = 'https://apid.iproyal.com';
+            new HttpClient({ apiToken: mockApiToken }, { baseURL: customBaseURL });
+
+            expect(mockedAxios.create).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    baseURL: customBaseURL,
+                })
+            );
+        });
+
+        it('should prefer overrides baseURL over config baseURL', () => {
+            mockedAxios.create.mockClear();
+            new HttpClient(
+                { apiToken: mockApiToken, baseURL: 'https://config-url.com' },
+                { baseURL: 'https://override-url.com' }
+            );
+
+            expect(mockedAxios.create).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    baseURL: 'https://override-url.com',
+                })
+            );
+        });
+    });
+
+    describe('authentication', () => {
+        it('should use Bearer auth by default', () => {
+            const mockAxiosInstance = (mockedAxios.create as jest.Mock).mock.results[0].value;
+            const requestInterceptor = mockAxiosInstance.interceptors.request.use.mock.calls[0][0];
+            const config = { headers: {} as Record<string, string> };
+            requestInterceptor(config);
+            expect(config.headers.Authorization).toBe('Bearer test-api-token');
+            expect(config.headers['X-Access-Token']).toBeUndefined();
+        });
+
+        it('should use X-Access-Token auth when authHeader override is x-access-token', () => {
+            mockedAxios.create.mockClear();
+            new HttpClient(
+                { apiToken: 'my-api-key' },
+                { baseURL: 'https://apid.iproyal.com', authHeader: 'x-access-token' }
+            );
+            const mockAxiosInstance = (mockedAxios.create as jest.Mock).mock.results[0].value;
+            const useCalls = mockAxiosInstance.interceptors.request.use.mock.calls;
+            const requestInterceptor = useCalls[useCalls.length - 1][0];
+            const config = { headers: {} as Record<string, string> };
+            requestInterceptor(config);
+            expect(config.headers['X-Access-Token']).toBe('my-api-key');
+            expect(config.headers.Authorization).toBeUndefined();
+        });
     });
 
     describe('HTTP methods', () => {
