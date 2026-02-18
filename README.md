@@ -19,13 +19,11 @@ const client = new IPRoyalClient({
     apiToken: 'your-api-token',
 });
 
-// Residential proxies
 const userInfo = await client.residential.getUserInfo();
 console.log(`Available traffic: ${userInfo.available_traffic} GB`);
 
 const countries = await client.residential.getCountries();
 
-// Datacenter or ISP proxies
 const balance = await client.datacenter.getBalance();
 const products = await client.isp.getProducts();
 ```
@@ -36,9 +34,13 @@ You need an API token. Get it from your [IPRoyal dashboard](https://dashboard.ip
 
 ```typescript
 const client = new IPRoyalClient({
-    apiToken: 'your-api-token',  // required
-    baseURL: 'https://resi-api.iproyal.com/v1',  // optional
-    timeout: 30000,  // optional, in ms
+    apiToken: 'your-api-token',
+    baseURL: 'https://resi-api.iproyal.com/v1',
+    residentialBaseURL: 'https://resi-api.iproyal.com/v1',
+    datacenterBaseURL: 'https://apid.iproyal.com',
+    ispBaseURL: 'https://apid.iproyal.com',
+    mobileBaseURL: 'https://apid.iproyal.com',
+    timeout: 30000,
 });
 ```
 
