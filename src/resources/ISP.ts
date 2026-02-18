@@ -10,6 +10,7 @@ import {
     ISPCreateOrderParams,
     ISPExtendOrderParams,
     ISPToggleAutoExtendParams,
+    ISPToggleAutoExtendResult,
     ISPProxyAvailabilityList,
     ISPChangeCredentialsParams,
 } from '../types';
@@ -49,8 +50,8 @@ export class ISP {
         return this.httpClient.post<ISPOrder>(`/orders/${orderId}/extend`, params);
     }
 
-    async toggleOrderAutoExtend(params: ISPToggleAutoExtendParams): Promise<ISPOrder> {
-        return this.httpClient.post<ISPOrder>('/orders/toggle-auto-extend', params);
+    async toggleOrderAutoExtend(params: ISPToggleAutoExtendParams): Promise<ISPToggleAutoExtendResult> {
+        return this.httpClient.post<ISPToggleAutoExtendResult>('/orders/toggle-auto-extend', params);
     }
 
     async getProxyAvailability(): Promise<ISPProxyAvailabilityList> {

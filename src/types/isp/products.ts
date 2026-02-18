@@ -6,19 +6,12 @@ export interface ISPPlan {
     max_quantity: number;
 }
 
-export interface ISPChildLocation {
-    id: number;
-    name: string;
-    out_of_stock: boolean;
-    available_proxies_count?: number;
-}
-
 export interface ISPLocation {
     id: number;
     name: string;
     out_of_stock: boolean;
     available_proxies_count?: number;
-    child_locations: ISPChildLocation[];
+    child_locations: ISPLocation[];
 }
 
 export interface ISPQuestion {
