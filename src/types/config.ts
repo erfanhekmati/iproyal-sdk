@@ -1,6 +1,9 @@
 export interface IPRoyalConfig {
     apiToken: string;
     baseURL?: string;
-    resellerBaseURL?: string;
+    residentialBaseURL?: string;
+    datacenterBaseURL?: string;
+    ispBaseURL?: string;
+    mobileBaseURL?: string;
     timeout?: number;
 }
